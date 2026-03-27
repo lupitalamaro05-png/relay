@@ -1,0 +1,6 @@
+# PluralLog Relay Server Dependencies
+flask>=3.0
+gunicorn>=21.0
+pynacl>=1.5.0          # Ed25519 signature verification (libsodium bindings)
+phe>=1.5.0             # Paillier homomorphic encryption
+cryptography>=41.0     # General crypto utilities

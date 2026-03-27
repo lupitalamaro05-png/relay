@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  plurallog-relay:
+    build: .
+    ports:
+      - "${PLURALLOG_PORT:-8443}:8443"
+    volumes:
+      - plurallog-data:/data
+      # Mount TLS certs if provided
+      # - ./certs:/certs:ro
+    environment:
+      - PLURALLOG_DB_PATH=/data/plurallog_relay.db
+      - PLURALLOG_VOLUME_PATH=/data/volumes
+      - PLURALLOG_MIN_PROTOCOL_VERSION=${PLURALLOG_MIN_PROTOCOL_VERSION:-1}
+      - PLURALLOG_MAX_VOLUME_SIZE=${PLURALLOG_MAX_VOLUME_SIZE:-10485760}
+      - PLURALLOG_MAX_USER_STORAGE=${PLURALLOG_MAX_USER_STORAGE:-52428800}
+      - PLURALLOG_POW_DIFFICULTY=${PLURALLOG_POW_DIFFICULTY:-0}
+      - PLURALLOG_ADMIN_TOKEN=${PLURALLOG_ADMIN_TOKEN:-}
+      # Uncomment for TLS:
+      # - PLURALLOG_TLS_CERT=/certs/cert.pem
+      # - PLURALLOG_TLS_KEY=/certs/key.pem
+    restart: unless-stopped
+
+volumes:
+  plurallog-data:
