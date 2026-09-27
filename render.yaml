@@ -1,0 +1,1 @@
+services: [{type: web, name: plurallog-relay, runtime: docker, plan: free, envVars: [{key: DATABASE_URL, value: "sqlite://data/plurallog.db"}, {key: PORT, value: "10000"}]}]
